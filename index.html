@@ -26,7 +26,7 @@
 				<picture>
 					<source srcset="assets/images/instagram.avif" type="image/avif">
 					<source srcset="assets/images/instagram.webp" type="image/webp">
-					<img src="assets/images/instagram.png" alt="">
+					<img src="assets/images/instagram.png" alt="" loading="lazy">
 				</picture>
 			</a></li>
 		</ul>
@@ -45,21 +45,21 @@
 				<picture>
 					<source srcset="./assets/images/slider/ryoji-iwata-wUZjnOv7t0g-unsplash.avif" type="image/avif">
 					<source srcset="./assets/images/slider/ryoji-iwata-wUZjnOv7t0g-unsplash.webp" type="image/webp">
-					<img src="./assets/images/slider/ryoji-iwata-wUZjnOv7t0g-unsplash.jpg" class="d-block w-100" alt="...">
+					<img src="./assets/images/slider/ryoji-iwata-wUZjnOv7t0g-unsplash.jpg" class="d-block w-100" alt="..." loading="lazy">
 				</picture>
 			</div>
 			<div class="carousel-item">
 				<picture>
 					<source srcset="./assets/images/slider/nicholas-green-nPz8akkUmDI-unsplash.avif" type="image/avif">
 					<source srcset="./assets/images/slider/nicholas-green-nPz8akkUmDI-unsplash.webp" type="image/webp">
-					<img src="./assets/images/slider/nicholas-green-nPz8akkUmDI-unsplash.jpg" class="d-block w-100" alt="...">
+					<img src="./assets/images/slider/nicholas-green-nPz8akkUmDI-unsplash.jpg" class="d-block w-100" alt="..." loading="lazy">
 				</picture>
 			</div>
 			<div class="carousel-item">
 				<picture>
 					<source srcset="./assets/images/slider/edward-cisneros-3_h6-1NPDGw-unsplash.avif" type="image/avif">
 					<source srcset="./assets/images/slider/edward-cisneros-3_h6-1NPDGw-unsplash.webp" type="image/webp">
-					<img src="./assets/images/slider/edward-cisneros-3_h6-1NPDGw-unsplash.jpg" class="d-block w-100" alt="...">
+					<img src="./assets/images/slider/edward-cisneros-3_h6-1NPDGw-unsplash.jpg" class="d-block w-100" alt="..." loading="lazy">
 				</picture>
 			</div>
 		</div>
@@ -72,6 +72,7 @@
 			<span class="visually-hidden">Next</span>
 		</button>
 	</div>
+</div>
 	<div id="about">
 		<div class="picture left">
 			<picture>
@@ -179,19 +180,31 @@
 				<picture>
 					<source srcset="./assets/images/logo.avif" type="image/avif">
 					<source srcset="./assets/images/logo.webp" type="image/webp">
-					<img src="./assets/images/logo.png" alt="Logo Nina Carducci">
+					<img src="./assets/images/logo.png" alt="Logo Nina Carducci" loading="lazy">
 				</picture>
 			</div>
 			<div class="footer__socials">
-				<a href="https://www.facebook.com/"><img src="./assets/images/facebook.svg" alt="Logo Facebook"></a>
+				<a href="https://www.facebook.com/"><img src="./assets/images/facebook.svg" alt="Logo Facebook" loading="lazy"></a>
 				<a href="https://www.instagram.com/">
 					<picture>
 						<source srcset="./assets/images/instagram.avif" type="image/avif">
 						<source srcset="./assets/images/instagram.webp" type="image/webp">
-						<img src="./assets/images/instagram.svg" alt="Logo Instagram">
+						<img src="./assets/images/instagram.svg" alt="Logo Instagram" loading="lazy">
 					</picture>
 				</a>
-				<a href="https://www.linkedin.com/"><img src="./assets/images/linkedin.svg" alt="Logo LinkedIn"></a>
+				<a href="https://www.linkedin.com/"><img src="./assets/images/linkedin.svg" alt="Logo LinkedIn" loading="lazy"></a>
 			</div>
 		</div>
 	</footer>
+	
+	<script src="./assets/aos/aos.js"></script>
+	<script>
+		AOS.init({
+			easing: 'ease',
+			duration: 1000,
+			once: true
+		});
+	</script>
+	
+	</body>
+	</html>
