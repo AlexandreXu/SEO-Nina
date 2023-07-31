@@ -27,6 +27,11 @@
           ) {
             tagsCollection.push(theTag);
           }
+          // Ajout des attributs alt et role aux images.
+          if (!$(this).attr("alt")) {
+            $(this).attr("alt", "");
+          }
+          $(this).attr("role", "img");
         });
 
       if (options.showTags) {
@@ -215,14 +220,14 @@
                     <div class="modal-body">
                         ${
                           navigation
-                            ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
+                            ? '<button class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><span class="sr-only">Image précédente</span></button>'
                             : '<span style="display:none;" />'
                         }
                         <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
                         <p class="img-caption"></p> 
                         ${
                           navigation
-                            ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
+                            ? '<button class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;"><span class="sr-only">Image suivante</span></button>'
                             : '<span style="display:none;" />'
                         }
                     </div>
