@@ -117,9 +117,12 @@
       $(`#${lightboxId}`)
         .find(".lightboxImage")
         .attr("src", element.attr("src"));
+      $(`#${lightboxId}`)
+        .find(".img-caption")
+        .text(element.attr("alt"));
       $(`#${lightboxId}`).modal("toggle");
     },
-    prevImage() {
+    prevImage(lightboxId) {
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
@@ -149,16 +152,19 @@
         next = null;
 
       $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i - 1;
+        if ($(this)[0].isSameNode($(activeImage)[0])) {
+          index = i;
         }
       });
-      next =
-        imagesCollection[index] ||
-        imagesCollection[imagesCollection.length - 1];
-      $(".lightboxImage").attr("src", $(next).attr("src"));
+
+      next = imagesCollection[index - 1];
+
+      if (next !== undefined) {
+        $(".lightboxImage").attr("src", $(next).attr("src"));
+        $(".img-caption").text($(next).attr("alt")); 
+      }
     },
-    nextImage() {
+    nextImage(lightboxId) {
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
@@ -188,76 +194,87 @@
         next = null;
 
       $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i + 1;
+        if ($(this)[0].isSameNode($(activeImage)[0])) {
+          index = i;
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
-      $(".lightboxImage").attr("src", $(next).attr("src"));
+
+      next = imagesCollection[index + 1];
+
+      if (next !== undefined) {
+        $(".lightboxImage").attr("src", $(next).attr("src"));
+        $(".img-caption").text($(next).attr("alt")); 
+      }
     },
     createLightBox(gallery, lightboxId, navigation) {
       gallery.append(`<div class="modal fade" id="${
         lightboxId ? lightboxId : "galleryLightbox"
       }" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            ${
-                              navigation
-                                ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
-                                : '<span style="display:none;" />'
-                            }
-                            <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
-                            ${
-                              navigation
-                                ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
-                                : '<span style="display:none;" />'
-                            }
-                        </div>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        ${
+                          navigation
+                            ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
+                            : '<span style="display:none;" />'
+                        }
+                        <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
+                        <p class="img-caption"></p> 
+                        ${
+                          navigation
+                            ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
+                            : '<span style="display:none;" />'
+                        }
                     </div>
                 </div>
-            </div>`);
+            </div>
+        </div>`);
     },
-    showItemTags(gallery, position, tags) {
-      var tagItems =
-        '<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>';
-      $.each(tags, function(index, value) {
-        tagItems += `<li class="nav-item active">
-                <span class="nav-link"  data-images-toggle="${value}">${value}</span></li>`;
-      });
-      var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`;
-
+    showItemTags(element, position, tagsCollection) {
       if (position === "bottom") {
-        gallery.append(tagsRow);
+        if (!element.children().hasClass("tags-bar")) {
+          element.append('<div class="tags-bar text-center"></div>');
+          $(".tags-bar").append(
+            '<span class="nav-link active-tag" data-images-toggle="all">Tous</span>'
+          );
+          tagsCollection.map(tag => {
+            $(".tags-bar").append(
+              `<span class="nav-link" data-images-toggle=${tag}>${tag}</span>`
+            );
+          });
+        }
       } else if (position === "top") {
-        gallery.prepend(tagsRow);
-      } else {
-        console.error(`Unknown tags position: ${position}`);
+        if (!element.children().hasClass("tags-bar")) {
+          element.prepend('<div class="tags-bar text-center"></div>');
+          $(".tags-bar").append(
+            '<span class="nav-link active-tag" data-images-toggle="all">Tous</span>'
+          );
+          tagsCollection.map(tag => {
+            $(".tags-bar").append(
+              `<span class="nav-link" data-images-toggle=${tag}>${tag}</span>`
+            );
+          });
+        }
       }
     },
     filterByTag() {
-      if ($(this).hasClass("active-tag")) {
-        return;
+      $(".tags-bar span").removeClass("active-tag");
+      $(this).addClass("active-tag");
+      $(".item-column").hide();
+      if ($(this).data("images-toggle") === "all") {
+        $(".item-column").show();
+      } else {
+        let activeTag = $(this).data("images-toggle");
+        $(".item-column").each(function() {
+          if (
+            $(this)
+              .children("img")
+              .data("gallery-tag") === activeTag
+          ) {
+            $(this).show();
+          }
+        });
       }
-      $(".active.active-tag").removeClass("active active-tag");
-      $(this).addClass("active-tag active");
-
-      var tag = $(this).data("images-toggle");
-
-      $(".gallery-item").each(function() {
-        $(this)
-          .parents(".item-column")
-          .hide();
-        if (tag === "all") {
-          $(this)
-            .parents(".item-column")
-            .show(300);
-        } else if ($(this).data("gallery-tag") === tag) {
-          $(this)
-            .parents(".item-column")
-            .show(300);
-        }
-      });
     }
   };
 })(jQuery);
