@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Nina Carducci - Photographe Professionnelle en Île-de-France</title>
-	<meta name="description"
-		content="Nina Carducci est une photographe professionnelle basée en Île-de-France. Découvrez son portfolio, ses services et contactez-la pour votre prochain shooting.">
-	<meta name="keywords"
-		content="Photographe, Île-de-France, Shooting photo, Retouches photo, Portfolio, Mariage, Entreprises, Concert">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Pour assurer une compatibilité correcte avec Internet Explorer -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nina Carducci - Photographe Professionnelle en Île-de-France</title>
+    <meta name="description" content="Nina Carducci est une photographe professionnelle basée en Île-de-France. Découvrez son portfolio, ses services et contactez-la pour votre prochain shooting.">
+    <meta name="keywords" content="Photographe, Île-de-France, Shooting photo, Retouches photo, Portfolio, Mariage, Entreprises, Concert">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap"
-		rel="stylesheet">
-	<link rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
-	<link rel="stylesheet" href="./assets/style.css">
-
-	<script defer src="./assets/bootstrap/bootstrap.bundle.js"></script>
-	<script defer src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script defer src="./assets/maugallery.js"></script>
-	<script defer src="./assets/scripts.js"></script>
-	<script defer src="./assets/aos/aos.js"></script>
+    <!-- Préchargement des polices et des feuilles de style -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/bootstrap/bootstrap.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/style.css" as="style" onload="this.rel='stylesheet'">
+    
+    <!-- Scripts avec l'attribut defer pour ne pas bloquer le rendu -->
+    <script defer src="./assets/bootstrap/bootstrap.bundle.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script defer src="./assets/maugallery.js"></script>
+    <script defer src="./assets/scripts.js"></script>
+    <script defer src="./assets/aos/aos.js"></script>
 </head>
 
 <body>
@@ -40,7 +33,7 @@
 						rel="noopener noreferrer" aria-label="Instagram de Nina Carducci">
 						<picture>
 							<source srcset="assets/images/instagram.webp" type="image/webp">
-							<img src="assets/images/instagram.png" alt="Icône Instagram" loading="lazy">
+							<img src="assets/images/instagram.png alt=" Icône Instagram" loading="lazy">
 						</picture>
 					</a>
 				</li>
@@ -211,19 +204,18 @@
 				</form>
 			</div>
 			<div class="picture right">
-				<img src="./assets/images/camera.avif">
+				<img src="./assets/images/camera.avif" alt="Image d'une caméra">
 			</div>
 		</div>
 	</section>
 
-	<script src="./assets/aos/aos.js"></script>
 	<script>
-		AOS.init({
-			easing: 'ease',
-			duration: 1000,
-			once: true
-		});
-	</script>
+        AOS.init({
+            easing: 'ease',
+            duration: 1000,
+            once: true
+        });
+    </script>
 
 </body>
 
